@@ -1,0 +1,19 @@
+<mat-nav-list>
+    <p mat-list-item>
+        <mat-form-field>
+            <mat-label>Valor</mat-label>
+            <input [(ngModel)]="valor" matInput currencyMask #txtvalor (keydown.enter)="enviar()">
+            <!-- <mat-error *ngIf="form.invalid">{{obterMensagemErro('codigoBarras')}}</mat-error> -->
+        </mat-form-field>
+    </p>
+    <p mat-list-item *ngIf="exibirCampoCodigo">
+        <mat-form-field>
+            <mat-label>Código transação</mat-label>
+            <input [(ngModel)]="codigoTransacao" matInput #txtvalor (keydown.enter)="enviar()">
+            <!-- <mat-error *ngIf="form.invalid">{{obterMensagemErro('codigoBarras')}}</mat-error> -->
+        </mat-form-field>
+    </p>
+    <p mat-list-item>
+        <button mat-raised-button color="primary" (click)="enviar()">Salvar</button>
+    </p>
+  </mat-nav-list>

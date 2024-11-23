@@ -1,0 +1,72 @@
+@import "../../../sass/all";
+
+header{
+    background: #585858;
+    color: white;
+    padding: 10px;
+    
+    h2, h3{
+        margin: 5px 10px;
+    }
+}
+section{
+    padding: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include responsive{
+        display: grid;
+        grid-template-columns: 50% 50%;
+    }
+
+    .visa{
+        background-image: url(../../../assets/img/visa.png);
+    }
+
+    .master{
+        background-image: url(../../../assets/img/mastercard.png);
+    }
+
+    .credito{
+        background: #3f51b5;
+    }
+
+    .debito{
+        background: #e53935;
+    }
+    
+    .dinheiro{
+        background-image: url(../../../assets/img/dinheiro.png);
+
+        h1{
+            background: #00c853;
+        }
+    }
+
+    .tipo-pagamento{
+        height: 150px;
+        width: 150px;
+        padding: 0px;        
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 98%;
+        overflow: hidden;
+        display: inline-block;
+        margin: 5px;
+        cursor: pointer;
+
+        h1{            
+            color: white;
+            font-size: 16px;
+            height: 29px;
+            width: 120px;
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-left: 14px;
+            margin-top: 8px;
+        }
+    }
+}

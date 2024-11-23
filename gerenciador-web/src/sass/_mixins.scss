@@ -1,0 +1,457 @@
+@mixin responsive($break-point: $responsive-break-point) {
+  @media screen and (max-width: $break-point) {
+    @content;
+  }
+}
+
+@mixin button(
+  $background: linear-gradient(var(--darkish-blue), var(--darkish-blue-two)),
+  $color: var(--sunflower-yellow-two),
+  $height: 60px,
+  $font-size: 20px,
+  $apply-disabled: 1,
+  $with: auto
+) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: $height;
+  font-weight: 600;
+  font-size: $font-size;
+  letter-spacing: -0.6px;
+  color: $color;
+  background-image: $background;
+  border-radius: $height * 0.5;
+  padding: 0 20px;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+  width: $with;
+
+  @if $apply-disabled==1 {
+    &:disabled {
+      color: var(--grey);
+      background: var(--light-grey-two);
+      cursor: default;
+    }
+  }
+
+  &:hover:not(:disabled) {
+    $elevation: 5px;
+
+    transform: translate3d(0, -$elevation, 0);
+    box-shadow: 0 $elevation ($elevation * 2) rgba(0, 0, 0, 0.4);
+    cursor: pointer;
+  }
+}
+
+@mixin button-blue($height: 60px, $font-size: 20px, $apply-disabled: 1) {
+  @include button(
+    linear-gradient(var(--blue), var(--blue)),
+    white,
+    $height,
+    $font-size,
+    $apply-disabled
+  );
+}
+
+@mixin button-blue-outline($height: 60px, $font-size: 20px, $apply-disabled: 1) {
+  @include button(
+    linear-gradient(transparent, transparent),
+    var(--blue),
+    $height,
+    $font-size,
+    $apply-disabled
+  );
+  border: 1px solid var(--blue);
+}
+
+@mixin button-yellow($height: 60px, $font-size: 20px, $apply-disabled: 1) {
+  @include button(
+    linear-gradient(var(--sunflower-yellow-four), var(--sunflower-yellow-four)),
+    var(--blue),
+    $height,
+    $font-size,
+    $apply-disabled
+  );
+}
+
+@mixin cover {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin modal($size: 575px) {
+  @include cover;
+
+  display: none;
+  position: fixed;
+  align-items: center;
+  justify-content: center;
+  z-index: $top-level-index;
+
+  &.open {
+    display: flex;
+  }
+
+  > div {
+    @include cover;
+
+    background: var(--mask-background);
+    z-index: -1;
+  }
+
+  > section {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: $size;
+    min-width: $size;
+    height: $size;
+    font-size: 16px;
+    line-height: 18px;
+    letter-spacing: -0.48px;
+    color: var(--warm-grey);
+    background-color: white;
+    border-radius: 50%;
+    box-shadow: $box-shadow2;
+
+    > button {
+      $size: 90px;
+      $icon-size: 21px;
+
+      position: absolute;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      top: 28px;
+      right: 49px;
+      width: $size;
+      height: $size;
+      font-size: $icon-size;
+      line-height: $icon-size;
+      color: var(--sunflower-yellow-two);
+      background: linear-gradient(var(--azure-87), var(--darkish-blue));
+      border-radius: 50%;
+      box-shadow: $box-shadow;
+      transition: transform 0.3s ease-in-out;
+      outline: none;
+      z-index: $top-level-index + 1;
+      cursor: default;
+
+      &:disabled {
+        opacity: 0.6;
+      }
+
+      &:hover:not(:disabled) {
+        transform: scale3d(1.2, 1.2, 1);
+        cursor: pointer;
+      }
+    }
+
+    .loading-cover {
+      border-radius: 50%;
+    }
+  }
+}
+
+@mixin page-component {
+  position: relative;
+  display: block;
+  // padding: 0 0 500px;
+  z-index: $content-z-index;
+  // overflow-x: hidden;
+
+  @include responsive {
+    padding-bottom: 0;
+    overflow: visible;
+  }
+}
+
+@mixin page-section {
+  max-width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: $padding-horizontal;
+  padding-right: $padding-horizontal;
+
+  &.header,
+  &.back,
+  &.filter,
+  &.content,
+  &.others {
+    max-width: $large-content-width;
+    @include responsive {
+      max-width: 88.88vw;
+    }
+  }
+
+  &.back {
+    button {
+      color: white;
+      font-size: 16px;
+      ui-icon {
+        color: var(--sunflower-yellow-four);
+      }
+    }
+  }
+
+  &.content {
+    background: white;
+    border-radius: 8px;
+    margin-top: 32px;
+  }
+
+  &.filter {
+    padding-bottom: 0;
+    button {
+      // @include button(none, var(--peacock-blue-two), 48px, 15px);
+      max-width: 200px !important;
+      min-height: 44px !important;
+      border: 1px solid var(--sunflower-yellow-four);
+      border-radius: 30px;
+      margin-right: 20px;
+      color: var(--blue);
+      background-color: var(--sunflower-yellow-four);
+      font-size: 18px;
+      font-weight: 700;
+      line-height: 1;
+
+      &.active {
+        color: white;
+        background-color: transparent;
+      }
+      &:focus {
+        outline: none;
+      }
+    }
+
+    app-input-field {
+      --input-field-height: 48px;
+      --input-field-border-radius: 24px;
+      --input-field-spacing: 25px;
+      --input-field-spacing-75: 15px;
+      --input-field-spacing-25: 10px;
+      --input-field-bg-color: transparent;
+      --input-field-color: white;
+      --input-field-border-color: var(--sunflower-yellow-four);
+      ::ng-deep {
+        label {
+          // & > span {
+          //   display: none;
+          // }
+          input {
+            &.input-select {
+              padding: 0 var(--input-field-spacing, 30px) 0 !important;
+            }
+          }
+          ui-icon {
+            color: var(--blue);
+          }
+        }
+      }
+    }
+  }
+
+  @include responsive {
+    max-width: $small-content-width;
+    padding: 0 $small-padding-horizontal;
+
+    h1,
+    h2 {
+      margin-bottom: 0;
+    }
+
+    h2 {
+      font-size: 20px;
+      line-height: 1.25;
+      letter-spacing: -0.6px;
+    }
+  }
+}
+
+@mixin page-header {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  height: $header-height-interal;
+  padding: 0 0 20px;
+  text-align: center;
+
+  @include responsive {
+    max-width: $small-content-width;
+    padding: 0 0 10px;
+    height: 305px;
+
+    > h1 {
+      margin-bottom: 0;
+      padding: 0 0px;
+    }
+  }
+
+  @include responsive(321px) {
+    > h1 {
+      padding: 0 20px;
+    }
+  }
+}
+
+@mixin close-button {
+  --close-button-size: 92px;
+
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  top: -14px;
+  right: -14px;
+  width: var(--close-button-size);
+  height: var(--close-button-size);
+  color: var(--dandelion);
+  background-image: linear-gradient(var(--azure-87), var(--darkish-blue));
+  border-radius: 50%;
+  box-shadow: $box-shadow;
+  transition: all 0.3s ease-in-out;
+  outline: none;
+
+  &:hover {
+    transform: scale(1.2);
+    cursor: pointer;
+  }
+
+  &:active {
+    transform: scale(0.9);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+  }
+
+  ui-icon {
+    font-size: 20px;
+  }
+}
+
+.visible-desktop {
+  @media screen and (max-width: $responsive-break-point) {
+    display: none !important;
+  }
+}
+
+.visible-mobile {
+  @media screen and (min-width: $responsive-break-point) {
+    display: none !important;
+  }
+}
+
+.hidden-desktop {
+  @media screen and (min-width: $responsive-break-point) {
+    display: none !important;
+  }
+}
+
+.hidden-mobile {
+  @media screen and (max-width: $responsive-break-point) {
+    display: none !important;
+  }
+}
+
+@mixin inputs-login {
+  app-input-field {
+    label {
+      span {
+        font-family: Arial;
+        font-style: normal;
+        font-weight: normal !important;
+        font-size: 16px !important;
+        line-height: 24px !important;
+        color: #0a80be !important;
+        display: block !important;
+        margin: 0 0 4px !important;
+      }
+
+      input {
+        height: 44px !important;
+        border: 1px solid #0a80be !important;
+        box-sizing: border-box;
+        border-radius: 53px !important;
+
+        font-family: Arial;
+        font-style: normal;
+        font-weight: normal;
+        font-size: 16px !important;
+        line-height: 1em !important;
+        padding: 0 29px !important;
+        color: #464646 !important;
+      }
+    }
+  }
+}
+
+@mixin form-placeholder {
+  &::-webkit-input-placeholder {@content}
+  &:-moz-placeholder           {@content}
+  &::-moz-placeholder          {@content}
+  &:-ms-input-placeholder      {@content}
+}
+
+
+/////
+// scroll DEFAULT
+/////
+@mixin scrollbars( $color: #50555a, $size: 6px ) {
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(var(--gray-500), 0.3);
+    border-radius: 10px;
+    background-color: #f1f5f7;
+  }
+
+  &::-webkit-scrollbar {
+    width: $size;
+    height: $size;
+    background-color: #f1f5f7;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 0 6px rgba(#ffffff, 0);
+    background-color: $color;
+  }
+}
+
+/////
+// scroll TRANSPARENT
+/////
+@mixin scrollbarsTransparent() {
+  &::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px transparent;
+    border-radius: 10px;
+    background-color: transparent;
+  }
+
+  &::-webkit-scrollbar {
+    width: 0px;
+    background-color: transparent
+  }
+
+  &::-webkit-scrollbar-thumb {
+    border-radius: 0px;
+    -webkit-box-shadow: inset 0 0 6px transparent;
+    background-color: transparent;
+  }
+
+  // For Internet Explorer
+  & {
+    scrollbar-face-color: var(--gray-300);
+    scrollbar-track-color: var(--gray-200);
+  }
+}

@@ -1,0 +1,21 @@
+<header>
+    <h2>Valor total venda: <strong>{{valorTotalVenda | currency : 'R$ '}}</strong></h2>
+    <h3>Falta pagar: <strong>{{valorTotalVenda - valorPagamentos | currency : 'R$ '}}</strong></h3>
+</header>
+<section>    
+    <mat-card class="tipo-pagamento dinheiro" (click)="addPagamento(1, null)">
+        <h1>DINHEIRO</h1>
+    </mat-card>
+    <mat-card class="tipo-pagamento visa" (click)="addPagamento(3, 1)">
+        <h1 class="credito">CRÉDITO</h1>
+    </mat-card>
+    <mat-card class="tipo-pagamento master" (click)="addPagamento(3, 2)">
+        <h1 class="credito">CRÉDITO</h1>
+    </mat-card>
+    <mat-card class="tipo-pagamento visa" (click)="addPagamento(4, 1)">
+        <h1 class="debito">DÉBITO</h1>
+    </mat-card>
+    <mat-card class="tipo-pagamento master" (click)="addPagamento(4, 2)">
+        <h1 class="debito">DÉBITO</h1>
+    </mat-card>
+</section>

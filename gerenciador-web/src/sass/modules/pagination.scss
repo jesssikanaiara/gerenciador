@@ -1,0 +1,32 @@
+div {
+  &.pagination {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+    align-items: center;
+    a, button {
+      margin: 0 5px;
+      width: 32px;
+      height: 32px;
+      text-align: center;
+      background-color: transparent;
+      color: var(--blue);
+      font-family: Arial;
+      font-size: 16px;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease-in-out;
+      border-radius: 50%;
+      border: 1px solid var(--blue);
+      &.active {
+        background-color: var(--blue);
+        color: white;
+      }
+      &:hover {
+        background-color: var(--azure-87);
+      }
+    }
+  }
+}

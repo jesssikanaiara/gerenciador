@@ -1,0 +1,33 @@
+<div style="height: 90vh;">
+  <mat-toolbar color="primary" *ngIf="exibirMenu">
+    <mat-toolbar-row>
+      <button mat-icon-button (click)="sidenav.toggle()" fxShow="true" fxHide.gt-sm>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <span>Gerenciador</span>
+      <span class="menu-spacer"></span>
+      <div fxShow="true" fxHide.lt-md>
+        <a href="estoque/produtos" mat-button>Produtos</a>
+      </div>
+      <div fxShow="true" fxHide.lt-md>
+        <a href="financeiro/clientes" mat-button>Clientes</a>
+      </div>
+      <div fxShow="true" fxHide.lt-md>
+        <a href="financeiro/pdv" mat-button>Vender</a>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+
+  <mat-sidenav-container fxFlexFill>
+    <mat-sidenav #sidenav>
+      <mat-nav-list>
+        <a (click)="sidenav.toggle()" href="" mat-list-item>Fechar</a>
+        <a href="estoque/produtos" mat-button>Produtos</a>
+        <a href="financeiro/clientes" mat-button>Clientes</a>
+      </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content fxFlexFill>
+      <router-outlet></router-outlet>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

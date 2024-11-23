@@ -1,0 +1,70 @@
+<section class="resumo-mobile" *ngIf="!fasePagamentos && !processandoVenda">
+    <mat-card>
+        <mat-card-header>
+            <mat-card-title>
+                Resumo -
+                <strong>Total:</strong>
+                <span>{{totalVenda | currency : 'R$ '}}</span>  
+                <mat-icon (click)="abrirResumoMobile = true" *ngIf="!abrirResumoMobile">menu</mat-icon>
+                <mat-icon (click)="abrirResumoMobile = false" *ngIf="abrirResumoMobile">close</mat-icon>
+            </mat-card-title>
+        </mat-card-header>        
+    </mat-card>
+</section>
+<section *ngIf="!fasePagamentos && !processandoVenda">    
+    <mat-card class="produtos">
+        <mat-card-header>
+            <mat-card-title>Produtos</mat-card-title>
+        </mat-card-header>
+        <mat-card-content *ngIf="produtos">            
+            <mat-card *ngFor="let item of produtos" (click)="addProduto(item)">
+                <mat-card-header>
+                    <mat-card-title>{{item.nome}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image src="assets/img/produto.png" alt="Photo of a Shiba Inu">
+                <mat-card-content>
+                    <div class="valor">
+                        <span>{{item.valorVenda | currency : 'R$ ' }}</span>
+                    </div>
+                </mat-card-content>
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+    <mat-card class="resumo" [class.abrirResumo]="abrirResumoMobile">
+        <mat-card-header>
+            <mat-card-title>Resumo</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <ul>
+                <li *ngFor="let item of produtosVenda">
+                    <p>{{item.produto.nome}}</p>
+                    <p>
+                        <span><strong>Valor:</strong>{{item.produto.valorVenda | currency : 'R$ '}}</span>
+                        <span><strong>Qtd:</strong>{{item.quantidade}}</span>
+                        <span><strong>Total:</strong>{{item.produto.valorVenda * item.quantidade | currency : 'R$ '}}</span>                        
+                    </p>
+                </li>
+                <li *ngIf="produtosVenda.length == 0">
+                    <h3>Nenhum produto adicionado</h3>
+                </li>
+            </ul>
+        </mat-card-content>
+        <mat-card-actions>
+            <p>Resumo</p>
+            <p>
+                <strong>Total:</strong>
+                <span>{{totalVenda | currency : 'R$ '}}</span>                
+            </p>
+            <p>
+                <button [disabled]="produtosVenda.length == 0" mat-raised-button color="primary" (click)="finalizarVendas()">Finalizar Venda</button>
+            </p>
+        </mat-card-actions>
+    </mat-card>
+</section>
+
+<app-pagamento *ngIf="fasePagamentos && !processandoVenda" [valorTotalVenda]="totalVenda" (pagamentoConcluido)="pagamentoConcluido($event)"></app-pagamento>
+
+<section class="spinner" *ngIf="processandoVenda">
+    <h1>Processando Venda</h1>
+    <mat-spinner></mat-spinner>
+</section>

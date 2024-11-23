@@ -1,0 +1,114 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--fontSize, 14px);
+  font-family: var(--font-primary);
+  transition: all 300ms ease;
+  position: relative;
+  border-radius: 4px;
+  overflow: hidden;
+  &:not([class*=' bg-']) {
+    background-color: var(--bgBtn);
+    color: var(--textBtn);
+  }
+  &:disabled {
+    opacity: 0.4;
+  }
+  &:not([class*=' btn-loading']) {
+    &:after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      height: 0px;
+      width: 100%;
+      background-color: black;
+      filter: contrast(100px);
+      opacity: 0.1;
+      transition: all 300ms ease;
+    }
+    &:hover {
+      &::after {
+        height: 100%;
+      }
+    }
+  }
+}
+
+button.btn-auto, a.btn-auto {
+  min-width: auto;
+}
+
+.btn-sm {
+  min-height: 44px;
+  min-width: 150px;
+  padding-left: 8px;
+  padding-right: 8px;
+  --fontSize: 18px;
+  --radiusBtn: 21px;
+  @media (max-width: 800px) {
+    min-width: auto;
+    min-height: 35px;
+    padding-left: 8px;
+    padding-right: 8px;
+    --fontSize: 19px;
+    --radiusBtn: 19px;
+  }
+}
+.btn-blue {
+  --bgBtn: var(--blue);
+  --textBtn: var(--text-color);
+}
+.btn-yellow {
+  --bgBtn: var(--dandelion);
+  --textBtn: var(--blue);
+}
+
+.btn.btn-outline {
+  border: 1px solid var(--bgBtn);
+  color: var(--bgBtn);
+  background-color: transparent;
+}
+
+.btn-radius {
+  border-radius: var(--radiusBtn, 21px);
+}
+
+.btn-loading {
+  position: relative;
+  overflow: hidden;
+  font-size: 0px;
+  pointer-events: none;
+  cursor: none;
+  &:after,
+  &:before {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+  }
+  &::after {
+    content: 'Aguarde';
+    position: absolute;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: var(--fontSize);
+  }
+  &:before {
+    content: '';
+    background-color: rgba(33, 29, 29, 0.15);
+    animation: loadingButton 2s ease infinite;
+    z-index: 22;
+    @keyframes loadingButton {
+      to {
+        width: 100%;
+      }
+    }
+  }
+}
+
+

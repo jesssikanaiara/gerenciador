@@ -1,0 +1,45 @@
+@mixin formulario(){
+    width: 100%;
+    display: flex;
+    justify-content: center;
+
+    > mat-card{
+        width: 70%;        
+        margin-top: 40px;
+
+        .botao-novo{
+            width: 100%;
+            text-align: right;
+        }
+
+        p{
+            display: flex;
+            flex-direction: row;
+
+            mat-form-field{
+                font-size: 18px;
+                flex-grow: 1;
+                margin: 0px 10px 0px 0px;
+
+                .campo-erro{
+                    color: red;
+                }
+            }
+
+        }
+
+        table{
+            width: 100%;
+            box-shadow: none;
+        }
+
+        @include responsive{
+            width: 100%;
+            margin-top: 0px;
+            
+            p{
+                flex-direction: column;
+            }
+        }
+    }
+}

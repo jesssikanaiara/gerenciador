@@ -1,0 +1,12 @@
+<mat-nav-list>
+    <p mat-list-item>
+        <mat-form-field>
+            <mat-label>Quantidade</mat-label>
+            <input type="number" [(ngModel)]="quantidade" matInput #txtquantidade (keydown.enter)="enviar()">
+            <!-- <mat-error *ngIf="form.invalid">{{obterMensagemErro('codigoBarras')}}</mat-error> -->
+        </mat-form-field>
+    </p>
+    <p mat-list-item>
+        <button mat-raised-button color="primary" (click)="enviar()">Salvar</button>
+    </p>
+  </mat-nav-list>

@@ -1,0 +1,23 @@
+@font-face{
+  font-family: 'Banco do Brasil Medium';
+  src:
+      url('/assets/fonts/BancoDoBrasilTitulos-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+      url('/assets/fonts/BancoDoBrasilTitulos-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+  ;
+}
+
+@font-face{
+  font-family: 'Banco do Brasil Bold';
+  src:
+      url('/assets/fonts/BancoDoBrasilTitulos-Bold.woff') format('woff'), /* Pretty Modern Browsers */
+      url('/assets/fonts/BancoDoBrasilTitulos-Bold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  ;
+}
+
+@font-face{
+  font-family: 'Banco do Brasil XBold';
+  src:
+      url('/assets/fonts/BancoDoBrasilTitulos-XBold.woff') format('woff'), /* Pretty Modern Browsers */
+      url('/assets/fonts/BancoDoBrasilTitulos-XBold.ttf')  format('truetype'), /* Safari, Android, iOS */
+  ;
+}
